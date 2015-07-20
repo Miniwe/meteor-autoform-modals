@@ -31,6 +31,7 @@ Template.autoformModals.rendered = ->
 			'cmCollection',
 			'cmOperation',
 			'cmDoc',
+			'cmDialogClasses',
 			'cmButtonHtml',
 			'cmFields',
 			'cmOmitFields',
@@ -39,6 +40,7 @@ Template.autoformModals.rendered = ->
 			'cmButtonClasses',
 			'cmPrompt',
 			'cmTemplate',
+			'cmSchema',
 			'cmLabelClass',
 			'cmInputColClass',
 			'cmPlaceholder',
@@ -87,12 +89,16 @@ helpers =
 		Session.get 'cmTitle'
 	cmButtonClasses: () ->
 		Session.get 'cmButtonClasses'
+	cmDialogClasses: () ->
+		Session.get 'cmDialogClasses'
 	cmCloseButtonClasses: () ->
 		Session.get 'cmCloseButtonClasses'
 	cmPrompt: () ->
 		Session.get 'cmPrompt'
 	cmTemplate: () ->
 		Session.get 'cmTemplate'
+	cmSchema: () ->
+		Session.get 'cmSchema'
 	cmLabelClass: () ->
 		Session.get 'cmLabelClass'
 	cmInputColClass: () ->
@@ -132,6 +138,7 @@ Template.afModal.events
 		Session.set 'cmButtonHtml', html
 		Session.set 'cmTitle', t.data.title or html
 		Session.set 'cmTemplate', t.data.template
+		Session.set 'cmSchema', t.data.schema
 		Session.set 'cmLabelClass', t.data.labelClass or t.data['label-class']
 		Session.set 'cmInputColClass', t.data.inputColClass or t.data['input-col-class']
 		Session.set 'cmPlaceholder', if t.data.placeholder is true then 'schemaLabel' else ''
@@ -160,6 +167,8 @@ Template.afModal.events
 
 		if t.data.buttonClasses
 			Session.set 'cmButtonClasses', t.data.buttonClasses
+		if t.data.dialogClasses
+			Session.set 'cmDialogClasses', t.data.dialogClasses
 		else if t.data.operation == 'remove'
 			Session.set 'cmButtonClasses', 'btn btn-danger'
 		else
